@@ -2,8 +2,8 @@ package service
 
 import (
 	"database/sql"
-	"业务/dao"
-	"业务/model"
+	"yewu/dao"
+	"yewu/model"
 )
 
 func ChangePassword(username, newPassword string) error {

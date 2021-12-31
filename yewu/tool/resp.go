@@ -14,6 +14,11 @@ func RespInternalError(ctx *gin.Context) {
 		"info": "服务器错误",
 	})
 }
+func RespczError(ctx *gin.Context){
+	ctx.JSON(406, gin.H{
+		"info": "操作失败",
+	})
+}
 //回复成功响应
 func RespSuccessful(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
@@ -25,5 +30,11 @@ func RespSuccessfulWithDate(ctx *gin.Context, date interface{}) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"info": "成功",
 		"date": date,
+	})
+}
+func RespSuccessfulWithimformation(ctx *gin.Context, information interface{}) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"info": "成功",
+		"information": information,
 	})
 }

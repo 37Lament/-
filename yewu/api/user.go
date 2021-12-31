@@ -3,17 +3,12 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"业务/model"
-	"业务/service"
-	"业务/tool"
-	"net/http"
+	"yewu/model"
+	"yewu/service"
+	"yewu/tool"
 )
 
-func Ping(ctx *gin.Context)  {
-	ctx.JSON(http.StatusOK,gin.H{
-		"info": "ping",
-	})
-}
+
 
 func changePassword(ctx *gin.Context) {
 	oldPassword := ctx.PostForm("old_password")
@@ -33,6 +28,11 @@ func changePassword(ctx *gin.Context) {
 		tool.RespErrorWithDate(ctx, "旧密码错误")
 		return
 	}
+	if len(newPassword) < 6{
+		tool.RespErrorWithDate(ctx,"密码应该大于6位")
+		return
+	}
+
 
 	//修改新密码
 	err = service.ChangePassword(username, newPassword)

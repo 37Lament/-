@@ -3,8 +3,8 @@ package api
 import (
 	"fmt"
 	"github.com/gin-gonic/gin"
-	"业务/tool"
 	"net/http"
+	"yewu/tool"
 )
 //查看登陆状态
 func auth(ctx *gin.Context) {
@@ -33,4 +33,9 @@ func Admin() gin.HandlerFunc {
 		c.Abort()
 		return
 	}
+}
+func Ping(ctx *gin.Context)  {
+	ctx.JSON(http.StatusOK,gin.H{
+		"info": "ping",
+	})
 }

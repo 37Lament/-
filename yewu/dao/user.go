@@ -1,6 +1,6 @@
 package dao
 
-import "业务/model"
+import "yewu/model"
 
 func UpdatePassword(username, newPassword string) error {
 	_, err := dB.Exec("UPDATE user SET password = ? WHERE username = ?", newPassword, username)
@@ -10,12 +10,12 @@ func UpdatePassword(username, newPassword string) error {
 func SelectUserByUsername(username string) (model.User, error) {
 	user := model.User{}
 
-	row := dB.QueryRow("SELECT id, password FROM user WHERE username = ? ", username)
+	row := dB.QueryRow("SELECT id, password ,Rmb FROM user WHERE username = ? ", username)
 	if row.Err() != nil {
 		return user, row.Err()
 	}
 
-	err := row.Scan(&user.Id, &user.Password)
+	err := row.Scan(&user.Id, &user.Password,&user.Rmb)
 	if err != nil {
 		return user, err
 	}

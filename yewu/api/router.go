@@ -13,16 +13,22 @@ func InitEngine() {
 		userGroup.Use(auth)
 		userGroup.POST("/password", changePassword) //修改密码
 	}
-	viewGroup := engine.Group("/view")//游客模式可使用的
+	//viewGroup := engine.Group("/view")//游客模式可使用的
 
 	adminGroup:=engine.Group("/admin")
 	{
-		adminGroup.GET("/",Admin)
+		adminGroup.GET("/")
 	}
 	rechargeGroup:=engine.Group("/recharge")
 	{
-		recharge.GET("/",recharege)
+		rechargeGroup.PUT("/",changeRMB)
 	}
-	adGroup:=engine.Group("ad")//广告，还没做
+	transferGroup:=engine.Group("/transfer")
+	{
+		transferGroup.Use(auth)
+		transferGroup.POST("/",transferAccounts)
+		transferGroup.POST("/search",searchByTxt)
+	}
+	//adGroup:=engine.Group("ad")//广告，还没做
 	engine.Run()
 }
